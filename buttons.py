@@ -1,5 +1,9 @@
+'''
+Здесь к окну чата добавил кнопки для записи голосом, состояния поймешь когда запустишь.
+не добавлял отправку запроса и stt, просто пытался понять можно ли запустить два цикла
+одновременно. спойлер - пока не понял
+'''
 import PySimpleGUI as sg
-
 
 sg.theme('Dark')
 sg.set_options(element_padding=(0, 0))
@@ -35,10 +39,10 @@ while True:
         for key, state in {'-Start-': True, '-Stop-': False, '-Reset-': True, '-Submit-': True}.items():
             window[key].update(disabled=state)
         recording = True
-        while recording:
-            new_event, nv = window.read()
-            if new_event == '-Stop-':
-                recording = False
+        # while recording:
+        #     new_event, nv = window.read()
+        #     if new_event == '-Stop-':
+        #         recording = False
 
     elif event == '-Stop-' and recording:
         [window[key].update(disabled=value) for key, value in {
@@ -52,7 +56,8 @@ while True:
         have_data = False
     elif event == '-Submit-' and have_data:
         [window[key].update(disabled=value) for key, value in {
-            '-Start-': False, '-Stop-': True, '-Reset-': True, '-Submit-': False}.items()]
+            '-Start-': False, '-Stop-': True, '-Reset-': True, '-Submit-': True}.items()]
         recording = False
+        have_data = False
 
 window.close()

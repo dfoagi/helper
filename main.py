@@ -1,3 +1,5 @@
+#speech to text module
+
 from vosk import Model, KaldiRecognizer
 import pyaudio
 import keyboard
