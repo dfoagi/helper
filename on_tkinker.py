@@ -1,3 +1,4 @@
+import json
 import threading
 import tkinter as tk
 import pyaudio
@@ -37,7 +38,7 @@ class VoiceRecorder:
             data = stream.read(4096)
             if recognizer.AcceptWaveform(data):
                 text = recognizer.Result()
-                parts.append(text[14:-3])
+                parts.append(json.loads(text)["text"])
 
         stream.stop_stream()
         stream.close()
